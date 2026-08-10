@@ -1,5 +1,5 @@
 <?php 
-if($_SERVER['REQUEST_METHOD']==='POST'&& !empty($_POST['note'])){
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && !empty($_POST['note'])) {
     $note =htmlspecialchars($_POST['note']);
 $line = date("Y-m-d H:i:s") . " | " .
 str_replace(["\r","\n","|"],"",$note) . PHP_EOL;

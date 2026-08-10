@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['n'])) {
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['n'])) {
     $n = (int)$_POST['n'];
     $sum = 0;
     for ($i = 1; $i <= $n; $i++) {

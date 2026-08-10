@@ -1,5 +1,5 @@
 <?php 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     $hoten = htmlspecialchars($_POST['hoten'] ?? '');
     $email = htmlspecialchars($_POST['email'] ?? '');
     $sdt = htmlspecialchars($_POST['sdt'] ?? '');

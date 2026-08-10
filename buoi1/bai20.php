@@ -5,7 +5,7 @@ if (isset($_GET['del'])) {
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['username'])) {
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && !empty($_POST['username'])) {
     setcookie('username', $_POST['username'], time() + (86400 * 30), '/');
     header('Location: bai20.php');
     exit;

@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['content'])) {
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && !empty($_POST['content'])) {
     $content = date("Y-m-d H:i:s") . " | " . str_replace(["\r", "\n"], " ", $_POST['content']) . PHP_EOL;
     file_put_contents('note.txt', $content, FILE_APPEND | LOCK_EX);
     $msg = "Đã lưu nội dung thành công!";

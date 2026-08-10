@@ -1,6 +1,6 @@
 <?php
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['name'])) {
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && !empty($_POST['name'])) {
 setcookie('name', $_POST['name'], time()+3600, '/');
 header('Location: remember.php'); exit;
 }
