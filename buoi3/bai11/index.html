@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <h2>Bảng tỷ giá ngoại tệ</h2>
+    <table border="1" id="tbl"></table>
+
+    <script>
+        function getRates() {
+            fetch('rates.php')
+                .then(res => res.json())
+                .then(data => {
+                    let html = "<tr><th>Mã ngoại tệ</th><th>Tên loại tiền</th><th>Giá mua</th><th>Giá bán</th></tr>";
+                    data.forEach(r => {
+                        html += `<tr>
+                            <td>${r.code}</td>
+                            <td>${r.name}</td>
+                            <td>${r.buy}</td>
+                            <td>${r.sell}</td>
+                        </tr>`;
+                    });
+                    document.getElementById("tbl").innerHTML = html;
+                });
+        }
+
+        getRates();
+        setInterval(getRates, 600000); // Cập nhật mỗi 10 phút (600000ms)
+    </script>
+</body>
+</html>

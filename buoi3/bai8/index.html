@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 8 - Chat đơn giản</title>
+</head>
+<body>
+    <textarea id="chat" rows="10" cols="40" readonly></textarea><br>
+    <input type="text" id="msg" placeholder="Nhập tin nhắn...">
+    <button onclick="send()">Gửi</button>
+
+    <script>
+        function loadChat() {
+            fetch('chat.php')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("chat").value = data.join("\n");
+                });
+        }
+        function send() {
+            let msgInput = document.getElementById("msg");
+            if (!msgInput.value.trim()) return;
+            let formData = new FormData();
+            formData.append('msg', msgInput.value);
+            fetch('chat.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(() => {
+                msgInput.value = '';
+                loadChat();
+            });
+        }
+        setInterval(loadChat, 2000);
+        loadChat();
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <h2>Ứng dụng To-do List</h2>
+    <input type="text" id="task" placeholder="Nhập công việc...">
+    <button onclick="addTask()">Thêm</button>
+    <ul id="list"></ul>
+
+    <script>
+        function loadTasks() {
+            fetch('todo.php')
+                .then(res => res.json())
+                .then(data => {
+                    let html = '';
+                    data.forEach(t => {
+                        html += `<li>
+                            <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTask('${t.id}')">
+                            <span style="${t.completed ? 'text-decoration: line-through;' : ''}">${t.text}</span>
+                            <button onclick="deleteTask('${t.id}')">Xóa</button>
+                        </li>`;
+                    });
+                    document.getElementById('list').innerHTML = html;
+                });
+        }
+
+        function addTask() {
+            let text = document.getElementById('task').value;
+            if (!text.trim()) return;
+            let formData = new FormData();
+            formData.append('action', 'add');
+            formData.append('text', text);
+
+            fetch('todo.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(() => {
+                document.getElementById('task').value = '';
+                loadTasks();
+            });
+        }
+
+        function toggleTask(id) {
+            let formData = new FormData();
+            formData.append('action', 'toggle');
+            formData.append('id', id);
+
+            fetch('todo.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(() => loadTasks());
+        }
+
+        function deleteTask(id) {
+            let formData = new FormData();
+            formData.append('action', 'delete');
+            formData.append('id', id);
+
+            fetch('todo.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(() => loadTasks());
+        }
+
+        loadTasks();
+    </script>
+</body>
+</html>
