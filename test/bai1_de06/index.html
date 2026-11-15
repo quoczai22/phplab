@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu 1 - Tính tiền đồ uống</title>
+    <link rel="stylesheet" href="../style.css">
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const tenKhach = document.querySelector('input[name="ten_khach"]').value;
+            const loai = document.querySelector('select[name="loai"]').value;
+            const soLy = document.querySelector('input[name="so_ly"]').value;
+
+            fetch('process.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: ten_khach=${encodeURIComponent(tenKhach)}&loai=${encodeURIComponent(loai)}&so_ly=${encodeURIComponent(soLy)}
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.querySelector('.alert').innerHTML = '';
+                document.querySelector('.bill').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="topbar">
+        <h1>QUÁN CÀ PHÊ HẠT NÂU</h1>
+        <p>Phần mềm tính tiền tại quầy</p>
+    </div>
+    <div class="wrap">
+        <h2>Tính tiền đồ uống</h2>
+
+        <!-- Khung lỗi: chỉ hiện khi có lỗi -->
+        <div class="alert">Tên khách không được để trống.</div>
+
+        <form method="post">
+            <div class="field">
+                <label>Tên khách</label>
+                <input type="text" name="ten_khach" value="">
+            </div>
+            <div class="field">
+                <label>Loại đồ uống</label>
+                <select name="loai">
+                    <option value="Cà phê">Cà phê</option>
+                    <option value="Trà sữa">Trà sữa</option>
+                    <option value="Nước ép">Nước ép</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Số ly</label>
+                <input type="text" name="so_ly" value="">
+            </div>
+            <button type="submit" class="btn">Tính tiền</button>
+        </form>
+
+        <!-- Khung kết quả: chỉ hiện khi tính thành công -->
+        <div class="bill"></div>
+
+        <h2>Bảng giá theo số ly</h2>
+        <table>
+            <tr><th>Số ly</th><th>Thành tiền</th></tr>
+            <tr><td>1</td><td class="price">25.000 đ</td></tr>
+            <tr><td>2</td><td class="price">50.000 đ</td></tr>
+        </table>
+    </div>
+</body>
+</html>

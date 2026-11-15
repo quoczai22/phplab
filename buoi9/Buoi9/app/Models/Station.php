@@ -23,7 +23,7 @@ class Station extends Model
         return $this->hasMany(Bicycle::class);
     }
 
-    public function rentalsForm(){
+    public function rentalsFrom(){
         return $this->hasMany(Rental::class,'rent_station_id');
     }
 
@@ -33,6 +33,10 @@ class Station extends Model
     }
 
     public function reviews(){
+        return $this->hasMany(StationReview::class);
+    }
+
+    public function stationReviews(){
         return $this->hasMany(StationReview::class);
     }
 }

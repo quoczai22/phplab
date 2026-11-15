@@ -12,6 +12,7 @@ class BicycleReview extends Model
     protected $fillable = [
         'user_id',
         'bicycle_id',
+        'rating',
         'ratting',
         'comment',
     ];

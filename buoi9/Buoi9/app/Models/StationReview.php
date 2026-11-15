@@ -9,9 +9,10 @@ class StationReview extends Model
 {
     use HasFactory;
 
-        protected $fillable = [
+    protected $fillable = [
         'user_id',
         'station_id',
+        'rating',
         'ratting',
         'comment',
     ];

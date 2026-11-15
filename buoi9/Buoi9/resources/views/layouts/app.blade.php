@@ -9,7 +9,7 @@
 <body>
     <!-- ===== HEADER ===== -->
     <div class="text-center py-3 border-bottom">
-        <h2>BikeGo</h2>
+        <h2>&#128690; BikeGo</h2>
     </div>
 
     <!-- ===== NAVIGATION + BANNER ===== -->
@@ -23,25 +23,60 @@
         <nav class="menu">
             <ul class="menu-list">
                 <li class="mb-1">
-                    <a class="fs-5 text-white text-decoration-none" href="#">Home</a>
+                    <a class="fs-5 text-white text-decoration-none" href="{{ url('/') }}">
+                        &#127968; Trang chủ
+                    </a>
                 </li>
                 <li class="mb-1">
-                    <a class="fs-5 text-white text-decoration-none" href="#">Trạm xe</a>
+                    <a class="fs-5 text-white text-decoration-none" href="{{ route('stations.index') }}">
+                        &#128205; Trạm xe
+                    </a>
                 </li>
                 <li class="mb-1">
-                    <a class="fs-5 text-white text-decoration-none" href="#">Đăng nhập</a>
+                    <a class="fs-5 text-white text-decoration-none" href="{{ route('reviews.index') }}">
+                        &#11088; Đánh giá
+                    </a>
                 </li>
-                <li class="mb-1">
-                    <a class="fs-5 text-white text-decoration-none" href="#">Đăng ký</a>
-                </li>
+
+                @auth
+                    {{-- Khi ĐÃ ĐĂNG NHẬP: Nếu là Admin thì bấm vào tên sẽ vào thẳng trang Quản trị, nếu là User thì vào Lịch sử thuê xe --}}
+                    <li class="mb-1">
+                        <a class="fs-5 text-white text-decoration-none"
+                           href="{{ Auth::user()->isAdmin() ? route('admin.dashboard') : route('rental.history') }}">
+                            &#128100; {{ Auth::user()->name }}
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="fs-5 text-white text-decoration-none" 
+                           href="#" 
+                           onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+                            &#128682; Đăng xuất
+                        </a>
+                        <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                @else
+                    <!-- Khi CHƯA ĐĂNG NHẬP: Hiển thị Đăng nhập và Đăng ký -->
+                    <li class="mb-1">
+                        <a class="fs-5 text-white text-decoration-none" href="{{ route('login') }}">
+                            &#128273; Đăng nhập
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="fs-5 text-white text-decoration-none" href="{{ route('register') }}">
+                            &#128221; Đăng ký
+                        </a>
+                    </li>
+                @endauth
             </ul>
         </nav>
 
         <!-- ACTION BUTTON -->
         <div class="action-box">
-            <a href="#"
+            <a href="{{ route('rental.index') }}"
                 class="action-item p-4 rounded border text-white" style="text-decoration:none"> «« THUÊ XE »» </a>
-            <a href="#"
+            <a href="{{ route('rental.return.form') }}"
                 class="action-item p-4 rounded border text-white" style="text-decoration:none"> «« TRẢ XE »» </a>
         </div>
     </section>
@@ -90,4 +125,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

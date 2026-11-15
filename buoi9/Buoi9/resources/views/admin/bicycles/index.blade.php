@@ -6,6 +6,7 @@
     <h3>Quản lý xe đạp</h3>
 
     <div>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">&larr; Trang quản trị</a>
         <a href="{{ route('admin.bicycles.create') }}" class="btn btn-primary">Thêm xe đạp mới</a>
         <a href="{{ route('admin.bicycles.trash') }}" class="btn btn-danger">Thùng rác</a>
     </div>

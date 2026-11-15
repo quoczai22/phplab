@@ -21,8 +21,9 @@
 .menu {
     position: absolute;
     left: 50px;
-    top: 50px;
+    top: 35px;
     color: white;
+    z-index: 3;
 }
 
 .menu-list {
@@ -163,3 +164,35 @@
     }
 }
 
+/* Xếp hạng */
+.top1 { transform: scale(1.2); color: gold; }
+.top2 { transform: scale(1.1); color: silver; }
+.top3 { transform: scale(1.05); color: #cd7f32; }
+
+.hover-row:hover {
+    background: #f5f5f5;
+    transform: scale(1.02);
+    transition: 0.3s;
+}
+
+/* Hạ tầng */
+.carousel {
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    animation: scroll 20s linear infinite;
+}
+
+.station-card {
+    min-width: 25%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}

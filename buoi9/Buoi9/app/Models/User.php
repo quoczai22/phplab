@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // Các vai trò (role) trong hệ thống
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER  = 'user';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -55,4 +59,14 @@ class User extends Authenticatable
     public function bicycleReviews(){
         return $this->hasMany(BicycleReview::class);
     }
+    /**
+     * Xác minh user có phải admin hay không.
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
 }

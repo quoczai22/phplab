@@ -13,7 +13,10 @@ class BicycleController extends Controller
     // Danh sách bicycle
     public function adminIndex()
     {
-        $bicycles = Bicycle::with('station')->paginate(10);
+        $bicycles = Bicycle::with('station')
+            ->withCount('reviews as total_reviews')
+            ->withAvg('reviews as avg_rating', 'rating')
+            ->paginate(10);
         return view('admin.bicycles.index', compact('bicycles'));
     }
 

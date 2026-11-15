@@ -6,6 +6,7 @@
     <h3>Quản lý trạm xe</h3>
 
     <div>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">&larr; Trang quản trị</a>
         <a href="{{ route('admin.stations.create') }}" class="btn btn-primary">Thêm trạm mới</a>
         <a href="{{ route('admin.stations.trash') }}" class="btn btn-danger">Thùng rác</a>
     </div>

@@ -19,7 +19,7 @@ class CreateRentalsTable extends Migration
             $table->foreignId('bicycle_id')->constrained('bicycles')->onDelete('cascade');
             $table->foreignId('rent_station_id')->constrained('stations')->onDelete('cascade');
             $table->foreignId('return_station_id')->nullable()->constrained('stations')->nullOnDelete();
-            $table->dateTime('returned_ad');
+            $table->dateTime('rented_at');
             $table->dateTime('returned_at')->nullable();
             $table->decimal('price_per_hour',10,2);
             $table->integer('total_hours')->nullable();

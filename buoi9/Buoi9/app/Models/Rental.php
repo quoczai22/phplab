@@ -14,7 +14,7 @@ class Rental extends Model
         'rent_station_id',
         'return_station_id',
         'rented_at',
-        'returnned_at',
+        'returned_at',
         'price_per_hour',
         'total_hours',
         'total_amount',
@@ -30,6 +30,10 @@ class Rental extends Model
 
     public function rentStation(){
         return $this->belongsTo(Station::class,'rent_station_id');
+    }
+
+    public function returnStation(){
+        return $this->belongsTo(Station::class,'return_station_id');
     }
 
     public function returnSation(){
